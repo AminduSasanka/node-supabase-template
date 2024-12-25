@@ -1,0 +1,29 @@
+{
+  "name": "supabase-user-authentication-backend",
+  "version": "0.0.1.0",
+  "description": "user authentication with supabase",
+  "main": "app.ts",
+  "author": "Amindu Liyanaratne",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\" ",
+    "build": "npx tsc"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.7",
+    "concurrently": "^9.1.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
