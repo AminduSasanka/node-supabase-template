@@ -179,6 +179,22 @@ const isAuthenticated = async (jwt: string) => {
   }
 }
 
+const refreshToken = async (jwtToken: string, refreshToken: string) => {
+  try {
+    let { data, error } =  await supabase.auth.setSession({ access_token: jwtToken, refresh_token: refreshToken })
+
+    if(error){
+      return null
+    }
+
+    return data.session
+  }
+  catch (error) {
+    console.error('Could not refresh token', error)
+    return null
+  }
+}
+
 export default {
   createUser,
   loginUser,
@@ -187,5 +203,6 @@ export default {
   isUserAuthenticated,
   recoverPassword,
   invite,
-  isAuthenticated
+  isAuthenticated,
+  refreshToken
 }
