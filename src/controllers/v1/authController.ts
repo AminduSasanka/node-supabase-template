@@ -8,6 +8,7 @@ import { EmailOtpType } from '@supabase/supabase-js'
 dotenv.config()
 
 const defaultAccessTokenName: string = "access_token"
+const defaultRefreshTokenName: string = "refresh_token"
 
 const logIn = async (req:Request, res:Response) => {
   const { email, password }: UserLoginRequestInterface = req.body
@@ -24,11 +25,18 @@ const logIn = async (req:Request, res:Response) => {
     res.cookie(
       `${process.env.SUPABASE_ACCESS_TOKEN_NAME || defaultAccessTokenName}`,
       session.access_token,
-      { httpOnly: true, 
-        maxAge: session.expires_in*1000 
+      { 
+        httpOnly: true
       }
     )
-    res.cookie(`${process.env.SUPABASE_REFRESH_TOKEN_NAME}`, session.refresh_token, { httpOnly: true })
+
+    res.cookie(`${process.env.SUPABASE_REFRESH_TOKEN_NAME || defaultRefreshTokenName}`, 
+      session.refresh_token,
+      { 
+        httpOnly: true 
+      }
+    )
+
     res.status(200).json({ message: "Successfully logged in", content: session.user, status: true })
     return
   }
