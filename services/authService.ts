@@ -166,9 +166,9 @@ const invite = async (user: InvitationData) => {
 
 const isAuthenticated = async (jwt: string) => {
   try {
-    let user = await supabase.auth.getUser(jwt)
+    let { data } = await supabase.auth.getUser(jwt)
 
-    if(!user)
+    if(!data.user)
       return false
 
     return true
