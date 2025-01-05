@@ -160,7 +160,22 @@ const invite = async (user: InvitationData) => {
   }
   catch (error) {
     console.error('Could not send the invitation', error)
-      return null
+    return null
+  }
+}
+
+const isAuthenticated = async (jwt: string) => {
+  try {
+    let user = await supabase.auth.getUser(jwt)
+
+    if(!user)
+      return false
+
+    return true
+  }
+  catch (error) {
+    console.error('Could not get user', error)
+    return false
   }
 }
 
@@ -171,5 +186,6 @@ export default {
   verifyToken,
   isUserAuthenticated,
   recoverPassword,
-  invite
+  invite,
+  isAuthenticated
 }
