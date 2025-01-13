@@ -2,12 +2,17 @@ import express, { json, Request, Response } from 'express';
 import dotenv from 'dotenv'
 import authRouter from './src/routes/v1/authRoutes';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 const app = express()
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
 
+// TODO: only expose to your client application
+app.use(cors({
+  origin: '*' 
+}))
 // TODO: add error handling for invalid json data
 app.use(json());
 app.use(cookieParser())
